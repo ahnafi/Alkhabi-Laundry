@@ -2,7 +2,7 @@
     <div class="min-h-screen flex">
         <!-- Kiri: Gambar -->
         <div class="hidden md:flex w-1/2 bg-pink-100 items-center justify-center">
-            <img src="{{ asset('imd/login.png') }}" alt="Login Image" class="w-3/4 h-auto object-cover rounded-xl shadow-lg">
+            <img src="{{ asset('img/bg-login.jpg') }}" alt="Login Image" class="w-3/4 h-auto object-cover rounded-xl shadow-lg">
         </div>
 
         <!-- Kanan: Form Login -->
