@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // ← TAMBAH role
     ];
 
     /**
@@ -44,5 +45,37 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Check if user is admin
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if user is pegawai
+     */
+    public function isPegawai()
+    {
+        return $this->role === 'pegawai';
+    }
+
+    /**
+     * Check if user is kasir
+     */
+    public function isKasir()
+    {
+        return $this->role === 'kasir';
+    }
+
+    /**
+     * Check if user is konsumen
+     */
+    public function isKonsumen()
+    {
+        return $this->role === 'konsumen';
     }
 }
