@@ -1,5 +1,5 @@
     <!-- Navbar -->
-    <nav class="bg-white shadow-md">
+<nav class="fixed top-0 left-0 right-0 w-full bg-white shadow-md z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mt-6 flex flex-col space-y-2">
             
@@ -27,7 +27,6 @@
             </a>
         </div>
     </div>
-
     <!-- Login & Register: Pojok Kanan -->
     <div class="hidden sm:flex items-center space-x-2 ml-auto">
         <a href="{{ route('login') }}" class="text-sm font-medium bg-white text-red-400 px-4 py-2 rounded-md hover:bg-gray-200 transition shadow">
@@ -52,17 +51,6 @@
                         </svg>
                     </button>
                 </div>
-            </div>
-        </div>
-
-        <!-- Mobile menu, show/hide based on menu state -->
-        <div class="mobile-menu hidden sm:hidden">
-            <div class="pt-2 pb-3 space-y-1">
-                <a href="#" class="bg-pink-50 border-pink-500 text-pink-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Beranda</a>
-                <a href="#layanan" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-pink-300 hover:text-pink-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Layanan</a>
-                <a href="#harga" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-pink-300 hover:text-pink-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Harga</a>
-                <a href="#tentang" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-pink-300 hover:text-pink-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Tentang Kami</a>
-                <a href="#kontak" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-pink-300 hover:text-pink-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Kontak</a>
             </div>
         </div>
     </nav>

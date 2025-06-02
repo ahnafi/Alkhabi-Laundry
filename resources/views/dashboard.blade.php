@@ -1,17 +1,27 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<!DOCTYPE html>
+<h lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Studio Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+        .pink-gradient {
+            background: linear-gradient(135deg, #fbcfe8 0%, #db2777 100%);
+        }
+        .text-shadow {
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Memanggil Navigation -->
+    <x-app-layout>
+    </x-app-layout>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("Anda berhasil login.") }}
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+    @include('hero')
+    
+    
+    
+</body>
+</html>
