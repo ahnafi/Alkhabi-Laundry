@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Studio Booking</title>
+    <title>Alkhabi Laundry</title>
     <script src="https://cdn.tailwindcss.com"></script>
         <style>
         .pink-gradient {
