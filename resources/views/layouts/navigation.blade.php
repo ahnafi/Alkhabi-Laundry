@@ -11,7 +11,7 @@
                     <a href="{{ route('dashboard') }}" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('dashboard') ? 'border-pink-500 text-pink-600' : 'border-transparent text-gray-500 hover:border-pink-300 hover:text-pink-500' }}">
                         Home
                     </a>
-                    <a href="{{ route('dashboard') }}#portofolio" class="border-transparent text-gray-500 hover:border-pink-300 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                    <a href="{{ route('pesan.index') }}" class="border-transparent text-gray-500 hover:border-pink-300 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         Pesan
                     </a>
                     <a href="{{ route('dashboard') }}#booking" class="border-transparent text-gray-500 hover:border-pink-300 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
@@ -98,7 +98,7 @@
                 <a href="{{ route('dashboard') }}" class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium {{ request()->routeIs('dashboard') ? 'bg-pink-50 border-pink-500 text-pink-700' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700' }}">
                     Home
                 </a>
-                <a href="{{ route('dashboard') }}#portofolio" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                <a href="{{ route('pesan.index') }}" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
                     Pesan
                 </a>
                 <a href="{{ route('dashboard') }}#booking" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
