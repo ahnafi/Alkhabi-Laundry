@@ -21,13 +21,15 @@ class PesanController extends Controller
     }
 
     // Menyimpan data pesanan ke database
+    // Menyimpan data pesanan ke database
     public function store(Request $request)
     {
         $request->validate([
             'nama_pelanggan' => 'required|string|max:255',
             'no_hp' => 'required|string|max:20',
             'alamat' => 'required|string',
-            'jenis_layanan' => 'required|array',
+            // PERBAIKAN 1: Diubah dari 'array' menjadi 'string'
+            'jenis_layanan' => 'required|string', 
             'paket' => 'required|string|in:reguler,ekspress,kilat',
         ]);
 
@@ -35,7 +37,8 @@ class PesanController extends Controller
             'nama_pelanggan' => $request->nama_pelanggan,
             'no_hp' => $request->no_hp,
             'alamat' => $request->alamat,
-            'jenis_layanan' => implode(',', $request->jenis_layanan), // simpan sebagai string terpisah koma
+            // PERBAIKAN 2: 'implode' dihapus
+            'jenis_layanan' => $request->jenis_layanan,
             'paket' => $request->paket,
         ]);
 
