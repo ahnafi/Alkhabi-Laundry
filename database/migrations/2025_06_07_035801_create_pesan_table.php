@@ -6,18 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('pesan', function (Blueprint $table) {
+        // GANTI 'pesan' menjadi 'pesans'
+        Schema::create('pesans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pelanggan');
             $table->string('no_hp');
             $table->text('alamat');
-            $table->string('jenis_layanan'); // disimpan sebagai string, bisa 'kiloan', 'satuan', atau keduanya dipisah koma
-            $table->string('paket'); // nilai: reguler, ekspress, kilat
+            $table->string('jenis_layanan'); 
+            $table->string('paket'); 
             $table->timestamps();
         });
     }
@@ -27,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pesan');
+        // GANTI 'pesan' menjadi 'pesans' juga di sini
+        Schema::dropIfExists('pesans');
     }
 };
