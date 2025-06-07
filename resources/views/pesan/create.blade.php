@@ -44,17 +44,29 @@ File: resources/views/pesan/create.blade.php (Desain Ulang Final)
                         {{-- Radio Button Pilihan Layanan --}}
                         <div>
                             <label class="block mb-3 text-sm font-medium text-gray-700">Jenis Layanan</label>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <label for="kiloan" class="relative flex items-center p-3 w-full bg-white border rounded-lg cursor-pointer has-[:checked]:bg-pink-50 has-[:checked]:border-pink-500 has-[:checked]:ring-2 has-[:checked]:ring-pink-200 transition-all duration-200">
+                            <div class="grid grid-cols-3 gap-4">
+                                
+                                <!-- Kiloan -->
+                                <label for="kiloan" class="relative flex items-center p-3 bg-white border rounded-lg cursor-pointer has-[:checked]:bg-pink-50 has-[:checked]:border-pink-500 has-[:checked]:ring-2 has-[:checked]:ring-pink-200 transition-all duration-200">
                                     <input id="kiloan" type="radio" name="jenis_layanan" value="kiloan" class="h-4 w-4 text-pink-600 border-gray-300 focus:ring-pink-500" required>
                                     <span class="ml-3 text-sm font-medium text-gray-700">Kiloan</span>
                                 </label>
-                                <label for="satuan" class="relative flex items-center p-3 w-full bg-white border rounded-lg cursor-pointer has-[:checked]:bg-pink-50 has-[:checked]:border-pink-500 has-[:checked]:ring-2 has-[:checked]:ring-pink-200 transition-all duration-200">
+
+                                <!-- Satuan -->
+                                <label for="satuan" class="relative flex items-center p-3 bg-white border rounded-lg cursor-pointer has-[:checked]:bg-pink-50 has-[:checked]:border-pink-500 has-[:checked]:ring-2 has-[:checked]:ring-pink-200 transition-all duration-200">
                                     <input id="satuan" type="radio" name="jenis_layanan" value="satuan" class="h-4 w-4 text-pink-600 border-gray-300 focus:ring-pink-500" required>
                                     <span class="ml-3 text-sm font-medium text-gray-700">Satuan</span>
                                 </label>
+
+                                <!-- Dry Clean (Fix id dan value) -->
+                                <label for="dryclean" class="relative flex items-center p-3 bg-white border rounded-lg cursor-pointer has-[:checked]:bg-pink-50 has-[:checked]:border-pink-500 has-[:checked]:ring-2 has-[:checked]:ring-pink-200 transition-all duration-200">
+                                    <input id="dryclean" type="radio" name="jenis_layanan" value="dryclean" class="h-4 w-4 text-pink-600 border-gray-300 focus:ring-pink-500" required>
+                                    <span class="ml-3 text-sm font-medium text-gray-700">Dry Clean</span>
+                                </label>
+
                             </div>
                         </div>
+
 
                         {{-- Pilihan Paket --}}
                         <div>

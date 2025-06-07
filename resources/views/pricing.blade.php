@@ -54,11 +54,11 @@
                         </li>
                         <li class="flex items-start">
                             <div class="flex-shrink-0"><svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div>
-                            <p class="ml-3 text-base text-gray-500">Proses 2 hari</p>
+                            <p class="ml-3 text-base text-gray-500">Setrika rapi</p>
                         </li>
                          <li class="flex items-start">
                             <div class="flex-shrink-0"><svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div>
-                            <p class="ml-3 text-base text-gray-500">Murah & hemat</p>
+                            <p class="ml-3 text-base text-gray-500">Proses 2 hari (48 jam) </p>
                         </li>
                     </ul>
                     <a href="#kontak" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</a>
@@ -70,7 +70,7 @@
                        <span class="bg-pink-500 text-white px-3 py-1 text-sm font-medium rounded-full shadow-md animate-pulse-subtle">Populer</span>
                     </div>
 
-                    <h3 class="text-xl font-medium text-pink-600">Premium</h3>
+                    <h3 class="text-xl font-medium text-pink-600">Express</h3>
                     <p class="mt-4 text-gray-500">Untuk perawatan lebih.</p>
 
                     <p class="mt-8">
@@ -93,7 +93,7 @@
                         </li>
                          <li class="flex items-start">
                            <div class="flex-shrink-0"><svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div>
-                           <p class="ml-3 text-base text-gray-500">Proses 1 hari</p>
+                           <p class="ml-3 text-base text-gray-500">Proses 1 hari (24 jam) </p>
                         </li>
                     </ul>
                     <a href="#kontak" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</a>
@@ -101,7 +101,7 @@
 
                 <!-- Kartu Harga 3: Express -->
                 <div class="relative flex flex-col bg-white border border-pink-200 rounded-lg shadow-sm p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                    <h3 class="text-xl font-medium text-pink-600">Express</h3>
+                    <h3 class="text-xl font-medium text-pink-600">Kilat</h3>
                     <p class="mt-4 text-gray-500">Untuk kebutuhan mendesak.</p>
                     
                     <p class="mt-8">
@@ -120,11 +120,11 @@
                         </li>
                         <li class="flex items-start">
                            <div class="flex-shrink-0"><svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div>
-                           <p class="ml-3 text-base text-gray-500">Proses 6 jam</p>
+                           <p class="ml-3 text-base text-gray-500">Setrika Rapi</p>
                         </li>
                          <li class="flex items-start">
                            <div class="flex-shrink-0"><svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg></div>
-                           <p class="ml-3 text-base text-gray-500">Antar jemput gratis</p>
+                           <p class="ml-3 text-base text-gray-500">Proses 1/2 hari (6 jam) </p>
                         </li>
                     </ul>
                     <a href="#kontak" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</a>

@@ -12,9 +12,10 @@
                 <span class="block text-pink-400">Bersih, Wangi, Rapi</span>
             </h1>
             
-           <p class="mt-3 max-w-md mx-auto text-base text-white sm:text-lg md:mt-5 md:text-xl md:max-w-3xl [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
+          <p class="mt-3 max-w-md mx-auto text-base text-white sm:text-lg md:mt-5 md:text-xl md:max-w-3xl [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
                 Solusi terbaik untuk kebutuhan laundry Anda. Kami mengutamakan kualitas dan kepuasan pelanggan.
-           </p>
+            </p>
+            
             <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
                 <div class="rounded-md shadow">
                     <a href="#kontak" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 md:py-4 md:text-lg md:px-10">

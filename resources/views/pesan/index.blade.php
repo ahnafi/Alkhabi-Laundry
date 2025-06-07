@@ -9,18 +9,22 @@ File: resources/views/pesan/index.blade.php (Desain Ulang)
         </h2>
     </x-slot>
 
+   {{-- ...biarkan bagian atas tetap seperti semula --}}
+
     <div class="py-12 bg-gradient-to-br from-pink-50 via-white to-pink-50">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white/80 backdrop-blur-sm overflow-hidden shadow-lg sm:rounded-2xl border border-gray-200">
                 <div class="p-6 md:p-8 text-gray-900">
 
                     {{-- Header dan Tombol Aksi --}}
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-                        <div>
-                            <h3 class="text-2xl font-bold text-pink-600">Riwayat Pesanan</h3>
-                            <p class="mt-1 text-sm text-gray-500">Lihat semua pesanan yang pernah Anda buat.</p>
-                        </div>
-                        <a href="{{ route('pesan.create') }}" class="mt-4 sm:mt-0 inline-flex items-center px-5 py-2.5 bg-pink-500 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-pink-600 active:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    <div class="mb-4">
+                        <h3 class="text-2xl font-bold text-pink-600">Riwayat Pesanan</h3>
+                        <p class="mt-1 text-sm text-gray-500">Lihat semua pesanan yang pernah Anda buat.</p>
+                    </div>
+
+                    {{-- Tombol di kiri atas --}}
+                    <div class="mb-6">
+                        <a href="{{ route('pesan.create') }}" class="inline-flex items-center px-5 py-2.5 bg-pink-500 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-pink-600 active:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                             <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
@@ -36,28 +40,28 @@ File: resources/views/pesan/index.blade.php (Desain Ulang)
                         </div>
                     @endif
 
-                    {{-- Kontainer Tabel Responsif --}}
+                    {{-- Kontainer Tabel --}}
                     <div class="w-full">
                         @if($pesanan->isEmpty())
                             {{-- Tampilan Saat Tidak Ada Pesanan --}}
                             <div class="text-center py-16 px-6 border-2 border-dashed border-pink-200 rounded-lg bg-pink-50/50">
                                 <svg class="mx-auto h-12 w-12 text-pink-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                  <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                                 <h3 class="mt-4 text-lg font-medium text-pink-800">Anda Belum Punya Pesanan</h3>
                                 <p class="mt-1 text-sm text-gray-500">Mari buat pesanan pertama Anda dan nikmati layanan kami!</p>
                             </div>
                         @else
-                            {{-- Tabel untuk Desktop --}}
-                            <div class="hidden md:block overflow-x-auto rounded-xl border border-gray-200">
+                            {{-- Tabel Desktop --}}
+                            <div class="hidden md:block overflow-x-auto rounded-xl border border-gray-200 mx-auto max-w-6xl">
                                 <table class="min-w-full">
                                     <thead class="bg-pink-100">
                                         <tr>
-                                            <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-pink-800">Nama Pelanggan</th>
-                                            <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-pink-800">No HP</th>
-                                            <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-pink-800">Layanan</th>
-                                            <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-pink-800">Paket</th>
-                                            <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-pink-800">Tanggal</th>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold text-pink-800">Nama Pelanggan</th>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold text-pink-800">No HP</th>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold text-pink-800">Layanan</th>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold text-pink-800">Paket</th>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold text-pink-800">Tanggal</th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
@@ -74,7 +78,7 @@ File: resources/views/pesan/index.blade.php (Desain Ulang)
                                 </table>
                             </div>
 
-                            {{-- Tampilan Kartu untuk Mobile --}}
+                            {{-- Kartu Mobile --}}
                             <div class="md:hidden grid grid-cols-1 gap-4">
                                 @foreach($pesanan as $pesan)
                                     <div class="bg-white p-4 rounded-xl shadow-md border border-gray-200">
