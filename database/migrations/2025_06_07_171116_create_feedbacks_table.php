@@ -6,27 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up()
+   
+    public function up(): void
     {
-        Schema::create('feedbacks', function (Blueprint $table) {
+    
+        Schema::create('feedback', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pelanggan');
-            $table->tinyInteger('puas_laundry'); // rating 1–5
-            $table->tinyInteger('puas_harga');   // rating 1–5
-            $table->text('kritik_saran')->nullable();
-            $table->timestamps();
+            $table->tinyInteger('puas_laundry'); 
+            $table->tinyInteger('puas_harga');   
+            $table->text('kritik_saran')->nullable(); 
         });
     }
 
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
-        Schema::dropIfExists('feedbacks');
+        Schema::dropIfExists('feedback');
     }
 };

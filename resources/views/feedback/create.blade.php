@@ -1,51 +1,84 @@
-@extends('layouts.app')
+<x-app-layout>
+    <div class="relative min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('{{ asset('img/bg-feedback.jpg') }}')">
+        
+        <div class="absolute inset-0 bg-black/30"></div>
 
-@section('content')
-<div class="container mt-5">
-    @if(session('success'))
-        <div class="alert alert-success text-center">
-            {{ session('success') }}
-        </div>
-    @endif
+        <div class="relative z-10 flex justify-center min-h-screen px-4 pt-28 pb-12 sm:px-6 sm:pt-32 lg:px-8">
+            
+            <div class="w-full max-w-4xl bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2">
 
-    <div class="card shadow-sm rounded-4">
-        <div class="card-header bg-pink text-white fw-bold">
-            Form Feedback Pelanggan
-        </div>
-        <div class="card-body">
-            <form method="POST" action="{{ route('feedback.store') }}">
-                @csrf
+                    <div class="hidden md:flex flex-col justify-center p-8 lg:p-12 bg-pink-500/10">
+                        <div class="text-center">
+                            <svg class="w-24 h-24 mx-auto text-pink-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-3-1m3 1v-2.25m-3-1l3-1m-3 1L9 3.25m6 6l-3 1m3-1l-3-1M9 3.25l-3 1m-3-1l3 1m0 0l3 1.636m0-1.636L12 5.25m0 0l3 1.636m0 0l3 1" />
+                            </svg>
+                            <h2 class="mt-6 text-3xl font-bold text-pink-600">Terima Kasih, Pelanggan Setia!</h2>
+                            <p class="mt-4 text-gray-700">Setiap ulasan Anda adalah bahan bakar bagi kami untuk terus memberikan yang terbaik. Bagikan pengalaman Anda bersama Alkhabi Laundry.</p>
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="nama_pelanggan" class="form-label">Nama Pelanggan:</label>
-                    <input type="text" name="nama_pelanggan" class="form-control" required>
+                    <div class="p-6 sm:p-8">
+                        <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Formulir Ulasan</h3>
+                        <form method="POST" action="{{ route('feedback.store') }}" class="space-y-6">
+                            @csrf
+
+                            <div>
+                                <label for="nama_pelanggan" class="block mb-2 text-sm font-medium text-gray-700">Nama Pelanggan</label>
+                                <input type="text" id="nama_pelanggan" name="nama_pelanggan" class="block w-full px-4 py-3 bg-gray-50/70 border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-pink-500 transition-colors" required>
+                            </div>
+
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-700">Kepuasan Hasil Laundry</label>
+                                <div class="flex flex-row-reverse justify-end items-center gap-1">
+                                    @for($i = 5; $i >= 1; $i--)
+                                        <input type="radio" name="puas_laundry" id="laundry_rating_{{ $i }}" value="{{ $i }}" class="peer hidden" required>
+                                        <label for="laundry_rating_{{ $i }}" class="text-gray-400 cursor-pointer text-4xl transition-colors peer-hover:text-pink-400 peer-checked:text-pink-500">★</label>
+                                    @endfor
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-700">Kesesuaian Harga</label>
+                                <div class="flex flex-row-reverse justify-end items-center gap-1">
+                                    @for($i = 5; $i >= 1; $i--)
+                                        <input type="radio" name="puas_harga" id="harga_rating_{{ $i }}" value="{{ $i }}" class="peer hidden" required>
+                                        <label for="harga_rating_{{ $i }}" class="text-gray-400 cursor-pointer text-4xl transition-colors peer-hover:text-pink-400 peer-checked:text-pink-500">★</label>
+                                    @endfor
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="kritik_saran" class="block mb-2 text-sm font-medium text-gray-700">Kritik dan Saran (Opsional)</label>
+                                <textarea id="kritik_saran" name="kritik_saran" rows="4" class="block w-full px-4 py-3 bg-gray-50/70 border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-pink-500 transition-colors"></textarea>
+                            </div>
+
+                            <div class="flex justify-end items-center gap-4 pt-4">
+                                <a href="{{ url('/') }}" class="px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-100 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-200">Batal</a>
+                                <button type="submit" class="px-6 py-3 text-sm font-semibold text-white bg-pink-500 rounded-lg shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105">
+                                    Kirim Ulasan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Apakah Anda puas dengan hasil laundry kami?</label><br>
-                    @for($i=1; $i<=5; $i++)
-                        <input type="radio" name="puas_laundry" value="{{ $i }}" required> ⭐
-                    @endfor
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Apakah harga yang ditawarkan sesuai dengan layanannya?</label><br>
-                    @for($i=1; $i<=5; $i++)
-                        <input type="radio" name="puas_harga" value="{{ $i }}" required> ⭐
-                    @endfor
-                </div>
-
-                <div class="mb-3">
-                    <label for="kritik_saran" class="form-label">Kritik dan Saran:</label>
-                    <textarea name="kritik_saran" class="form-control" rows="4"></textarea>
-                </div>
-
-                <div class="text-end">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="{{ url('/') }}" class="btn btn-secondary">Cancel</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-@endsection
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonText: 'Luar Biasa!',
+                confirmButtonColor: '#EC4899', // Warna pink
+            });
+        </script>
+    @endif
+</x-app-layout>
