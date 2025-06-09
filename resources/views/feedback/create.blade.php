@@ -77,7 +77,7 @@
                 text: "{{ session('success') }}",
                 icon: 'success',
                 confirmButtonText: 'Luar Biasa!',
-                confirmButtonColor: '#EC4899', // Warna pink
+                confirmButtonColor: '#EC4899',
             });
         </script>
     @endif

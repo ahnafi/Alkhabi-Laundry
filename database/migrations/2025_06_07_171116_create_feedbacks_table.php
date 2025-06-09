@@ -16,6 +16,7 @@ return new class extends Migration
             $table->tinyInteger('puas_laundry'); 
             $table->tinyInteger('puas_harga');   
             $table->text('kritik_saran')->nullable(); 
+            $table->timestamps();
         });
     }
 
