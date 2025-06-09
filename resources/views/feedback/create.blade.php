@@ -15,7 +15,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-3-1m3 1v-2.25m-3-1l3-1m-3 1L9 3.25m6 6l-3 1m3-1l-3-1M9 3.25l-3 1m-3-1l3 1m0 0l3 1.636m0-1.636L12 5.25m0 0l3 1.636m0 0l3 1" />
                             </svg>
                             <h2 class="mt-6 text-3xl font-bold text-pink-600">Terima Kasih, Pelanggan Setia!</h2>
-                            <p class="mt-4 text-gray-700">Setiap ulasan Anda adalah bahan bakar bagi kami untuk terus memberikan yang terbaik. Bagikan pengalaman Anda bersama Alkhabi Laundry.</p>
+                            <p class="mt-4 text-gray-700">Setiap ulasan Anda adalah evaluasi bagi kami untuk terus memberikan yang terbaik. Bagikan pengalaman Anda bersama Alkhabi Laundry.</p>
                         </div>
                     </div>
 
