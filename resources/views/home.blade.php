@@ -24,34 +24,29 @@
 @include('footer')
 
     <script>
-        // Mobile menu toggle
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const mobileMenu = document.querySelector('.mobile-menu');
         
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             
-            // Toggle icons
             const icons = mobileMenuButton.querySelectorAll('svg');
             icons.forEach(icon => {
                 icon.classList.toggle('hidden');
             });
         });
         
-        // Close mobile menu when clicking on a link
         const mobileLinks = document.querySelectorAll('.mobile-menu a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
                 
-                // Show/hide correct icons
                 const icons = mobileMenuButton.querySelectorAll('svg');
                 icons[0].classList.remove('hidden');
                 icons[1].classList.add('hidden');
             });
         });
 
-        // Smooth scrolling for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();

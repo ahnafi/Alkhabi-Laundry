@@ -1,4 +1,4 @@
-<div class="relative overflow-hidden mt-20">
+<div class="relative overflow-hidden mt-20" id="hero">
     
     <img src="{{ asset('img/bg-dashboard.jpg') }}" alt="Background Alkhabi Laundry" class="absolute inset-0 w-full h-full object-cover">
     

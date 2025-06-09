@@ -10,7 +10,7 @@
             <span class="text-pink-600 font-bold text-2xl">Alkhabi</span>
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-            <a href="#" class="border-pink-500 text-pink-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+            <a href="#hero" class="border-pink-500 text-pink-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                 Beranda
             </a>
             <a href="#layanan" class="border-transparent text-gray-500 hover:border-pink-300 hover:text-pink-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">

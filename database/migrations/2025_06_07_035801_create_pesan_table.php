@@ -8,7 +8,6 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // GANTI 'pesan' menjadi 'pesans'
         Schema::create('pesans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pelanggan');
@@ -16,16 +15,20 @@ return new class extends Migration
             $table->text('alamat');
             $table->string('jenis_layanan'); 
             $table->string('paket'); 
+            
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+            $table->string('status')->default('Menunggu Konfirmasi');
+            
+            $table->decimal('berat', 8, 2)->nullable(); // contoh: 4.50 kg
+            $table->unsignedInteger('total_harga')->nullable(); // contoh: 45000
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        // GANTI 'pesan' menjadi 'pesans' juga di sini
         Schema::dropIfExists('pesans');
     }
 };

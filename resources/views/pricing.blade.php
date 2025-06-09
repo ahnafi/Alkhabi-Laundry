@@ -15,10 +15,8 @@
     class="relative bg-cover bg-center bg-no-repeat py-16 sm:py-24 z-0" 
     style="background-image: url('{{ asset('img/bg-pricing.jpg') }}');"
 >
-    <!-- Lapisan Overlay Semi-Transparan (Opacity dikurangi agar lebih cerah) -->
     <div class="absolute inset-0 bg-white/30 z-10"></div>
 
-    <!-- Konten Utama (dibuat 'relative' agar muncul di atas overlay) -->
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
         <div class="lg:text-center">
             <h2 class="text-base text-pink-600 font-bold tracking-wide uppercase">Daftar Harga</h2>
@@ -33,7 +31,6 @@
         <div class="mt-16">
             <div class="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
                 
-                <!-- Kartu Harga 1: Regular -->
                 <div class="relative flex flex-col bg-white border border-pink-200 rounded-lg shadow-sm p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <h3 class="text-xl font-medium text-pink-600">Regular</h3>
                     <p class="mt-4 text-gray-500">Untuk kebutuhan sehari-hari.</p>
@@ -64,7 +61,6 @@
                     <a href="#kontak" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</a>
                 </div>
 
-                <!-- Kartu Harga 2: Premium (Populer) -->
                 <div class="relative flex flex-col bg-white border-2 border-pink-500 rounded-lg shadow-lg p-8">
                     <div class="absolute top-0 -translate-y-1/2 w-full flex justify-center">
                        <span class="bg-pink-500 text-white px-3 py-1 text-sm font-medium rounded-full shadow-md animate-pulse-subtle">Populer</span>
@@ -99,7 +95,6 @@
                     <a href="#kontak" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</a>
                 </div>
 
-                <!-- Kartu Harga 3: Express -->
                 <div class="relative flex flex-col bg-white border border-pink-200 rounded-lg shadow-sm p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <h3 class="text-xl font-medium text-pink-600">Kilat</h3>
                     <p class="mt-4 text-gray-500">Untuk kebutuhan mendesak.</p>

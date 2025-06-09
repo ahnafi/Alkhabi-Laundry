@@ -28,7 +28,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // PERUBAHAN DI SINI: Redirect ke dashboard dengan pesan sukses
+        return redirect()->intended(route('dashboard', absolute: false))
+                         ->with('status', 'Login berhasil! Selamat datang kembali.');
     }
 
     /**

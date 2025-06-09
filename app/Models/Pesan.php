@@ -9,11 +9,33 @@ class Pesan extends Model
 {
     use HasFactory;
 
+    protected $table = 'pesans';
+
     protected $fillable = [
+        'user_id',
         'nama_pelanggan',
         'no_hp',
         'alamat',
         'jenis_layanan',
         'paket',
+        'status',
+        'berat',
+        'total_harga',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class, 'pesanan_id');
+    }
+
+    public function feedback()
+    {
+        // Pastikan nama model Feedback benar
+        return $this->hasOne(Feedback::class, 'pesanan_id');
+    }
 }

@@ -12,7 +12,6 @@
             <h2 class="text-pink-300 text-2xl font-bold mb-2 text-center">Welcome Back</h2>
             <p class="text-pink-100 text-center mb-6">Log in to continue your journey</p>
 
-            <!-- Session Status -->
             @if (session('status'))
                 <div class="mb-4 text-sm text-green-100 bg-green-500/30 p-3 rounded-lg">
                     {{ session('status') }}
