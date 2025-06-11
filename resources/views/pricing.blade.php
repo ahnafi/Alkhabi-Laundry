@@ -58,7 +58,7 @@
                             <p class="ml-3 text-base text-gray-500">Proses 2 hari (48 jam) </p>
                         </li>
                     </ul>
-                    <a href="#kontak" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</a>
+                    <button onclick="handlePilihPaket()" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</button>
                 </div>
 
                 <div class="relative flex flex-col bg-white border-2 border-pink-500 rounded-lg shadow-lg p-8">
@@ -92,7 +92,7 @@
                            <p class="ml-3 text-base text-gray-500">Proses 1 hari (24 jam) </p>
                         </li>
                     </ul>
-                    <a href="#kontak" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</a>
+                    <button onclick="handlePilihPaket()" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</button>
                 </div>
 
                 <div class="relative flex flex-col bg-white border border-pink-200 rounded-lg shadow-sm p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
@@ -122,10 +122,39 @@
                            <p class="ml-3 text-base text-gray-500">Proses 1/2 hari (6 jam) </p>
                         </li>
                     </ul>
-                    <a href="#kontak" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</a>
+                    <button onclick="handlePilihPaket()" class="mt-8 block w-full bg-pink-600 border border-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-pink-700 transition-all duration-300 transform hover:-translate-y-0.5">Pilih Paket</button>
                 </div>
                 
             </div>
         </div>
     </div>
 </div>
+
+@php
+    $user = Auth::user();
+@endphp
+
+<script>
+    function handlePilihPaket() {
+        const isLoggedIn = @json($user !== null);
+
+        if (isLoggedIn) {
+            window.location.href = "{{ route('pesan.create.step1') }}";
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops!',
+                text: 'Maaf, Anda belum memiliki akun. Silakan register terlebih dahulu.',
+                confirmButtonText: 'Oke',
+                confirmButtonColor: '#d33',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ route('register') }}";
+                }
+            });
+        }
+    }
+</script>
+
+<!-- Tambahkan SweetAlert2 jika belum -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

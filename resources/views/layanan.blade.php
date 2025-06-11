@@ -25,7 +25,7 @@
                         <dd class="mt-2 ml-16 text-base text-gray-500">
                             Cucian menumpuk? Serahkan pada kami! <br>
                             Layanan ini cocok untuk pakaian sehari-hari seperti kaos, celana, seragam, hingga baju tidur. 
-                            Kami hitung berdasarkan berat (per kilogram), praktis dan ekonomis.
+                            Kami hitung berdasarkan berat (per kilogram), praktis dan ekonomis dengan harga 7000/Kg.
                         </dd>
                     </div>
 
@@ -43,9 +43,9 @@
                             Layanan ini cocok untuk item berukuran besar atau berbahan khusus
                                 <div>
                                     <ul>
-                                        <li>Sprei single size / king size</li>
-                                        <li>Bedcover</li>
-                                        <li>Boneka</li>
+                                        <li>Sprei single size / king size: 14.000/Item.</li>
+                                        <li>Bedcover: 20.000/Item.</li>
+                                        <li>Boneka: 10.000/Item.</li>
                                     </ul>
                                 </div>
                         </dd>
@@ -62,7 +62,7 @@
                         </dt>
                         <dd class="mt-2 ml-16 text-base text-gray-500">
                             Jangan ambil risiko untuk pakaian premium Anda! <br>
-                            Dry clean adalah pilihan aman untuk jas, kebaya, gaun, dan pakaian berbahan lembut lainnya.
+                            Dry clean adalah pilihan aman untuk jas, kebaya, gaun, dan pakaian berbahan lembut lainnya dengan harga 25.000/Pasang.
                         </dd>
                     </div>
 

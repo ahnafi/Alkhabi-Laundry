@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout id="pesan">
     <div class="py-12 bg-gradient-to-br from-pink-50 via-white to-pink-50">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             

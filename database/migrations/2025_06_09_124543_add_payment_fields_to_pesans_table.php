@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pesans', function (Blueprint $table) {
-            $table->foreignId('user_id')->after('paket')->nullable()->constrained()->onDelete('cascade');
+            // Mengubah baris ini:
+            // Sebelumnya: $table->foreignId('user_id')->after('paket')->nullable()->constrained()->onDelete('cascade');
+            // Sekarang:
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
 
             $table->string('status')->after('user_id')->default('Menunggu Konfirmasi');
             $table->decimal('berat', 8, 2)->after('status')->nullable();

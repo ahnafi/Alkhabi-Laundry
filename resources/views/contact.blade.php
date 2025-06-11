@@ -24,8 +24,8 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3 text-gray-500">
-                                    <p>Jl. Laundry Bersih No. 123</p>
-                                    <p>Jakarta Selatan, Indonesia</p>
+                                    <p>Jl. Raya Mayjen Sungkono No.KM 5</p>
+                                    <p>Blater, Kec. Kalimanah, Kabupaten Purbalingga, Jawa Tengah</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
@@ -35,7 +35,7 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3 text-gray-500">
-                                    <p>+62 812-3456-7890</p>
+                                    <p>(0282) 123-4567</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
@@ -45,7 +45,7 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3 text-gray-500">
-                                    <p>info@alkhabi.id</p>
+                                    <p>laundry@alkhabi.id</p>
                                 </div>
                             </div>
                             <div class="flex items-start">

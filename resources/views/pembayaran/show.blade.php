@@ -25,8 +25,8 @@
                             <span class="font-medium capitalize">{{ $pesanan->paket }}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-gray-600">Berat Cucian</span>
-                            <span class="font-medium">{{ $pesanan->berat ?? '0.00' }} kg</span>
+                            <span class="text-gray-600">Berat Cucian / Item</span>
+                            <span class="font-medium">{{ $pesanan->berat ?? '0.00' }} kg / item</span>
                         </div>
                         <div class="pt-4 mt-4 border-t flex justify-between items-baseline">
                             <span class="text-lg font-semibold text-gray-800">Total Tagihan</span>
@@ -40,7 +40,7 @@
                         <p class="text-xs text-gray-500 mb-4">
                             Dengan menekan tombol di bawah, Anda akan diarahkan ke halaman pembayaran aman.
                         </p>
-                        <button id="pay-button" class="w-full inline-flex items-center justify-center px-8 py-4 bg-green-500 border border-transparent rounded-lg font-semibold text-lg text-white hover:bg-green-600 transition shadow-lg">
+                        <button id="pay-button" class="w-full inline-flex items-center justify-center px-8 py-4 bg-pink-500 border border-transparent rounded-lg font-semibold text-lg text-white hover:bg-pink-700 transition shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H7a3 3 0 00-3 3v8a3 3 0 003 3z" />
                             </svg>
@@ -65,7 +65,7 @@
             <p class="text-sm text-gray-500 mt-2">Gunakan aplikasi Bank atau E-Wallet favorit Anda.</p>
 
             <div class="my-4">
-                <img src="{{ asset('img/pay-qris.png') }}" alt="QRIS Alkhabi Laundry" class="w-56 mx-auto rounded-lg border-4 border-pink-200 p-1">
+                <img src="{{ asset('img/qris-alkhabi.png') }}" alt="QRIS Alkhabi Laundry" class="w-56 mx-auto rounded-lg border-4 border-pink-200 p-1">
             </div>
 
             <p class="text-sm font-bold">
