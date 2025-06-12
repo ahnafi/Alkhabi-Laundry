@@ -42,10 +42,10 @@ class PesanResource extends Resource
                     ->description('Isi detail ini untuk menghasilkan tagihan.')
                     ->schema([
                         TextInput::make('berat')
-                            ->label('Berat (kg)')
+                            ->label('Berat (kg) / Item')
                             ->numeric()
                             ->required()
-                            ->suffix('kg'),
+                            ->suffix('kg / item'),
                         TextInput::make('total_harga')
                             ->label('Total Harga')
                             ->numeric()

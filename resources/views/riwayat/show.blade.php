@@ -26,8 +26,8 @@
                                     <span class="font-medium text-gray-800 capitalize">{{ $pesan->paket }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="text-gray-500">Estimasi Berat:</span>
-                                    <span class="font-medium text-gray-800">{{ $pesan->berat ?? 'Belum ditimbang' }} {{ $pesan->berat ? 'kg' : '' }}</span>
+                                    <span class="text-gray-500">Estimasi Berat/item:</span>
+                                    <span class="font-medium text-gray-800">{{ $pesan->berat ?? 'Belum ditimbang' }} {{ $pesan->berat ? 'kg/item' : '' }}</span>
                                 </div>
                             </div>
                         </div>
