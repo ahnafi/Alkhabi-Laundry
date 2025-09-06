@@ -18,7 +18,6 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Services\RegisterFilament;
 
 class UPanelProvider extends PanelProvider
 {
@@ -28,9 +27,12 @@ class UPanelProvider extends PanelProvider
             ->id('u')
             ->path('u')
             ->login()
-            ->registration(RegisterFilament::class)
+            ->registration()
+            ->emailVerification()
+            ->emailChangeVerification()
+            ->profile(isSimple: false)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Pink,
             ])
             ->discoverResources(in: app_path('Filament/U/Resources'), for: 'App\Filament\U\Resources')
             ->discoverPages(in: app_path('Filament/U/Pages'), for: 'App\Filament\U\Pages')
