@@ -13,10 +13,10 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_code')->unique();
-            $table->foreignId('user_id')->constrained('users', 'user_id')->cascadeOnDelete();
-            $table->foreignId('responsible_user_id')->constrained('users', 'user_id')->cascadeOnDelete();
-            $table->foreignId('pickup_address_id')->constrained('addresses', 'address_id')->cascadeOnDelete();
-            $table->foreignId('delivery_address_id')->constrained('addresses', 'address_id')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('responsible_user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('pickup_address_id')->constrained('addresses')->cascadeOnDelete();
+            $table->foreignId('delivery_address_id')->constrained('addresses')->cascadeOnDelete();
             $table->enum('status', [
                 'PENDING',
                 'CONFIRMED',
