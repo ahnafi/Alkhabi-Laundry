@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -59,5 +60,30 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             $this->hasRole('user') && $panelId === 'u' => true,
             default => false,
         };
+    }
+
+    public function customerOrders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
+    public function responsibleOrders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'responsible_user_id');
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function feedbacks(): HasMany
+    {
+       return $this->hasMany(Feedback::class);
     }
 }

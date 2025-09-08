@@ -8,12 +8,21 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 'user_id',
+     * 'order_id',
+     * 'rating',
+     * 'comment',
      */
     public function up(): void
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->integer('rating')->default(0);
+            $table->string('comment')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
