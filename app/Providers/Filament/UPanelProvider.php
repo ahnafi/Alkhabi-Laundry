@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Services\RegisterFilament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -27,7 +28,7 @@ class UPanelProvider extends PanelProvider
             ->id('u')
             ->path('u')
             ->login()
-            ->registration()
+            ->registration(RegisterFilament::class)
             ->emailVerification()
             ->emailChangeVerification()
             ->profile(isSimple: false)
