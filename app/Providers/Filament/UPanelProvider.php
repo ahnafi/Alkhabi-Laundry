@@ -28,6 +28,7 @@ class UPanelProvider extends PanelProvider
             ->id('u')
             ->path('u')
             ->login()
+            ->favicon(asset('img/logo-alkhabi.png'))
             ->registration(RegisterFilament::class)
             ->emailVerification()
             ->emailChangeVerification()

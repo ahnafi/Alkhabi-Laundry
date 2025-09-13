@@ -26,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->default()
+            ->favicon(asset('img/logo-alkhabi.png'))
             ->path('admin')
             ->login()
             ->profile(isSimple: false)

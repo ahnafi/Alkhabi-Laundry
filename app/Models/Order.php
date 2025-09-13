@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class Order extends Model
 {
@@ -26,6 +27,11 @@ class Order extends Model
         'notes',
         'completed_date',
     ];
+
+    public function setCodeAttribute(): void
+    {
+        $this->attributes['code'] = "LNDRY" . Carbon::now()->format("ymd") . str_pad($this->id, 4, '0', STR_PAD_LEFT);
+    }
 
     public function customer(): BelongsTo
     {
