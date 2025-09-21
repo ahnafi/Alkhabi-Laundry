@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\U\Resources\Addresses\Tables;
+namespace App\Filament\U\Resources\Transactions\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -10,39 +10,42 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
-use Illuminate\Support\Collection;
 
-class AddressesTable
+class TransactionsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn ($query) => $query->where('user_id', auth()->id()))
             ->columns([
-                TextColumn::make('recipient_phone')
-                    ->label('Nomor Telepon Penerima')
+                TextColumn::make('order.id')
                     ->searchable(),
-                TextColumn::make('recipient_name')
-                    ->label('Nama Penerima')
+                TextColumn::make('user.name')
                     ->searchable(),
-                TextColumn::make('label')
-                    ->label('Label Alamat')
+                TextColumn::make('gateway_transaction_id')
                     ->searchable(),
-                TextColumn::make('notes')
-                    ->label('Catatan')
+                TextColumn::make('payment_method')
+                    ->searchable(),
+                TextColumn::make('payment_channel')
+                    ->searchable(),
+                TextColumn::make('amount')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('currency')
+                    ->searchable(),
+                TextColumn::make('status'),
+                TextColumn::make('signature')
+                    ->searchable(),
+                TextColumn::make('ip_address')
                     ->searchable(),
                 TextColumn::make('created_at')
-                    ->label('Dibuat Pada')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label('Diperbarui Pada')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
-                    ->label('Dihapus Pada')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

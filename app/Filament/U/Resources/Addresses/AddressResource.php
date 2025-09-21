@@ -19,8 +19,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AddressResource extends Resource
 {
     protected static ?string $model = Address::class;
-
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $label = "Alamat";
+    protected static ?string $modelLabel = "Alamat";
+    protected static ?string $navigationLabel = "Alamat";
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHomeModern;
 
     protected static ?string $recordTitleAttribute = 'label';
 

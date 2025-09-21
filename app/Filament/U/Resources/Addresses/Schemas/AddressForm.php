@@ -13,11 +13,6 @@ class AddressForm
     {
         return $schema
             ->components([
-                Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->default(auth()->id())
-                    ->hidden()
-                    ->required(),
                 TextInput::make('recipient_phone')
                     ->tel()
                     ->required(),
@@ -28,8 +23,7 @@ class AddressForm
                     ->columnSpanFull(),
                 TextInput::make('label')
                     ->required(),
-                TextInput::make('notes')
-                    ->required(),
+                TextInput::make('notes'),
             ]);
     }
 }

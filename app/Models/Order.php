@@ -28,10 +28,10 @@ class Order extends Model
         'completed_date',
     ];
 
-    public function setCodeAttribute(): void
-    {
-        $this->attributes['code'] = "LNDRY" . Carbon::now()->format("ymd") . str_pad($this->id, 4, '0', STR_PAD_LEFT);
-    }
+//    public function setCodeAttribute(): void
+//    {
+//        $this->attributes['code'] = "LNDRY" . Carbon::now()->format("ymd") . str_pad($this->id, 4, '0', STR_PAD_LEFT);
+//    }
 
     public function customer(): BelongsTo
     {

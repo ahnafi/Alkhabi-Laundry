@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
 
             // Relasi ke order & user
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();

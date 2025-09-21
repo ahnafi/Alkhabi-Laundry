@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('recipient_name');
             $table->text('full_address');
             $table->string('label');
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
