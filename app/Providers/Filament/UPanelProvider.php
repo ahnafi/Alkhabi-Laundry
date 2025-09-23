@@ -31,6 +31,7 @@ class UPanelProvider extends PanelProvider
             ->favicon(asset('img/logo-alkhabi.png'))
             ->registration(RegisterFilament::class)
             ->emailVerification()
+            ->databaseNotifications()
             ->emailChangeVerification()
             ->profile(isSimple: false)
             ->colors([

@@ -20,13 +20,13 @@ class ServiceForm
                     ->columnSpanFull(),
                 Select::make('unit')
                     ->options([
-            'kg' => 'Kg',
-            'pcs' => 'Pcs',
-            'set' => 'Set',
-            'pasang' => 'Pasang',
-            'lembar' => 'Lembar',
-            'meter' => 'Meter',
-        ])
+                        'kg' => 'Kg',
+                        'pcs' => 'Pcs',
+                        'set' => 'Set',
+                        'pasang' => 'Pasang',
+                        'lembar' => 'Lembar',
+                        'meter' => 'Meter',
+                    ])
                     ->required(),
                 TextInput::make('price_per_unit')
                     ->required()

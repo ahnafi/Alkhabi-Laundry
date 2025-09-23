@@ -20,7 +20,7 @@ class Order extends Model
         'pickup_address_id',
         'delivery_address_id',
         'status',
-        'total_weight',
+        'total_qty',
         'subtotal_amount',
         'delivery_fee',
         'total_amount',

@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('img/logo-alkhabi.png'))
             ->path('admin')
             ->login()
+            ->databaseNotifications()
             ->profile(isSimple: false)
             ->emailChangeVerification()
             ->colors([

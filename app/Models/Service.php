@@ -16,11 +16,6 @@ class Service extends Model
         "price_per_unit"
     ];
 
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class);
-    }
-
     public function orderItems(): HasMany {
         return $this->hasMany(OrderItem::class);
     }
