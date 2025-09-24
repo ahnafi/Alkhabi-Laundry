@@ -33,8 +33,8 @@ class OrdersTable
 
     public static function configure(Table $table): Table
     {
-
         return $table
+            ->defaultSort('created_at', 'DESC')
             ->columns([
                 TextColumn::make('code')
                     ->searchable(),
@@ -77,6 +77,7 @@ class OrdersTable
                 ViewAction::make(),
                 // alur dimulai
                 Action::make("Konfirmasi")
+                    ->visible(fn(Order $record) => $record->status == "PENDING")
                     ->requiresConfirmation()
                     ->schema([
                         TextInput::make('customer_name')
@@ -111,8 +112,9 @@ class OrdersTable
                     ])
                     ->action(fn(Order $record) => resolve(OrderService::class)->confirm($record))
                     ->color("success")
-                    ->icon(Heroicon::OutlinedCheck),
+                    ->icon(Heroicon::Check),
                 Action::make("Batalkan")
+                    ->visible(fn(Order $record) => $record->status == "PENDING" || $record->status == "CONFIRMED")
                     ->requiresConfirmation()
                     ->schema([
                         TextInput::make('customer_name')
@@ -150,10 +152,11 @@ class OrdersTable
                     ])
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->cancel($record, $data["reason"]))
                     ->color("danger")
-                    ->icon(Heroicon::OutlinedXMark),
+                    ->icon(Heroicon::XMark),
 
                 // mengambil laundry ke customer
                 Action::make("Ambil Laundry")
+                    ->visible(fn(Order $record) => $record->status == "CONFIRMED")
                     ->requiresConfirmation()
                     ->schema([
                         TextInput::make('customer_name')
@@ -175,12 +178,13 @@ class OrdersTable
                     ])
                     ->color("info")
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->pickedUp($record))
-                    ->icon(Heroicon::OutlinedTruck),
+                    ->icon(Heroicon::Truck),
 
                 // penimbangan
                 // pengisian paket
                 // pembayaran laundry
                 Action::make("Transaction")
+                    ->visible(fn(Order $record) => $record->status == "PICKED_UP" && $record->payment_status == "UNPAID")
                     ->label("Buat Transaksi")
                     ->schema([
                         Section::make('Informasi Pelanggan')
@@ -250,32 +254,37 @@ class OrdersTable
 
                     ])
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->setOrderItem($record, $data))
-                    ->icon(Heroicon::OutlinedCreditCard)
+                    ->icon(Heroicon::CreditCard)
                     ->color("info"),
 
                 // proses laundry
                 Action::make("Laundry")
+                    ->visible(fn(Order $record) => $record->status == "PICKED_UP" && $record->payment_status == "PAID")
                     ->action(fn(Order $record) => resolve(OrderService::class)->processing($record))
                     ->color("warning")
-                    ->icon(Heroicon::OutlinedCog6Tooth),
+                    ->icon(Heroicon::Cog6Tooth),
+
 
                 // Laundry selesai
                 Action::make("Laundry Selesai")
+                    ->visible(fn(Order $record) => $record->status == "IN_PROCESS" && $record->payment_status == "PAID")
                     ->action(fn(Order $record) => resolve(OrderService::class)->processingDone($record))
                     ->color("success")
-                    ->icon(Heroicon::OutlinedCheckBadge),
+                    ->icon(Heroicon::CheckBadge),
 
                 // Mengirim laundry
                 Action::make("Kirim Laundry")
+                    ->visible(fn(Order $record) => $record->status == "READY" && $record->payment_status == "PAID")
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->outOfDelivery($record))
                     ->color("info")
-                    ->icon(Heroicon::OutlinedPaperAirplane),
+                    ->icon(Heroicon::PaperAirplane),
 
                 // laundry sampai
                 Action::make("Laundry Sudah sampai")
+                    ->visible(fn(Order $record) => $record->status == "OUT_FOR_DELIVERY" && $record->payment_status == "PAID")
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->delivered($record))
                     ->color("success")
-                    ->icon(Heroicon::OutlinedHomeModern),
+                    ->icon(Heroicon::HomeModern),
 
                 ActionGroup::make([
                     EditAction::make(),

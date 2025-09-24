@@ -40,7 +40,6 @@ return new class extends Migration {
             //CANCELLED - Order dibatalkan
 
             $table->enum('payment_status', ['UNPAID', 'PAID', 'EXPIRED'])->default('UNPAID');
-            $table->decimal('total_weight', 5, 2)->nullable();
             $table->decimal('subtotal_amount', 12, 2)->default(0);
             $table->decimal('delivery_fee', 10, 2)->default(0);
             $table->decimal('total_amount', 12, 2)->default(0);

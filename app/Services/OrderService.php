@@ -139,7 +139,6 @@ class OrderService
         if ($order->payment_status == "PAID") {
 
             $order->status = "IN_PROCESS";
-            $order->save();
 
             Notification::make("order_processing")
                 ->info()
@@ -149,6 +148,8 @@ class OrderService
                 ->icon(Heroicon::OutlinedCog);
 
             Log::info("processing order database message to $customer->name");
+
+            $order->save();
 
         } else {
 
@@ -240,11 +241,7 @@ class OrderService
                 ->actions([
                     Action::make("order_completed")
                         ->label("Konfirmasi Laundry")
-                        ->requiresConfirmation()
-                        ->action($this->userConfirmed($order)),
-
-                    Action::make("feedback")
-                        ->label("Ulasan")
+                        ->url(route("filament.u.resources.orders.index")),
                 ])
                 ->icon(Heroicon::OutlinedCheckCircle)
                 ->sendToDatabase($customer);
@@ -269,20 +266,31 @@ class OrderService
 
     public function userConfirmed(Order $order): void
     {
-        $order->status = "CONFIRMED";
-        $order->save();
+        $order->status = "COMPLETED";
 
-        Notification::make("order_confirmed")
+        Notification::make("order_completed")
             ->title("Berhasil Konfirmasi Pesanan ")
             ->success()
             ->send();
 
-        $adminUsers = User::whereIn('role', ['admin', 'superadmin'])->get();
+        Notification::make("feedback")
+            ->success()
+            ->title("Laundry $order->code telah selesai")
+            ->body("Terima kasih telah menggunakan layanan laundry kami! Kami sangat menghargai kepercayaan Anda. Bagikan pengalaman Anda dengan memberikan ulasan atau sampaikan keluhan melalui kontak customer service yang tersedia.")
+            ->actions([
+                Action::make("feedback")
+                    ->url(route('filament.u.resources.orders.index'))
+                    ->label("Ulasan")
+                    ->color("success")
+            ])
+            ->sendToDatabase($order->customer);
+
+        $adminUsers = User::withoutRole('user')->get();
 
         foreach ($adminUsers as $adminUser) {
 
             Notification::make("order_cancelled_user")
-                ->danger()
+                ->success()
                 ->title("Laundry Dikonfirmasi")
                 ->body("Laundry dengan kode $order->code telah dikonfirmasi oleh {$order->customer->name}")
                 ->sendToDatabase($adminUser)
@@ -290,13 +298,15 @@ class OrderService
         }
 
         Log::info("order confirmed message to $order->code");
+
+        $order->save();
     }
 
     public function userCancel(Order $order, string $reason): void
     {
         if ($order->status == "CONFIRMED" || $order->status == "PENDING" || $order->status == "PICKED_UP") {
 
-            $adminUsers = User::whereIn('role', ['admin', 'superadmin'])->get();
+            $adminUsers = User::withoutRole('user')->get();
 
             $order->status = "CANCELLED";
 
