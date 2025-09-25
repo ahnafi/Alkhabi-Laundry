@@ -37,24 +37,72 @@ class OrdersTable
             ->defaultSort('created_at', 'DESC')
             ->columns([
                 TextColumn::make('code')
+                    ->label('Kode Pesanan')
                     ->searchable(),
                 TextColumn::make('customer.name')
+                    ->label('Nama Pelanggan')
                     ->searchable(),
                 TextColumn::make('customer.email')
+                    ->label('Email Pelanggan')
                     ->searchable(),
                 TextColumn::make('status')
-                    ->badge(),
+                    ->label('Status')
+                    ->badge()
+                    ->formatStateUsing(function (string $state): string {
+                        return match ($state) {
+                            'PENDING' => 'Menunggu',
+                            'CONFIRMED' => 'Dikonfirmasi',
+                            'PICKED_UP' => 'Diambil',
+                            'IN_PROCESS' => 'Dalam Proses',
+                            'READY' => 'Siap',
+                            'OUT_FOR_DELIVERY' => 'Sedang Dikirim',
+                            'DELIVERED' => 'Terkirim',
+                            'COMPLETED' => 'Selesai',
+                            'CANCELLED' => 'Dibatalkan',
+                            default => $state,
+                        };
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'PENDING' => 'warning',
+                        'CONFIRMED' => 'info',
+                        'PICKED_UP' => 'primary',
+                        'IN_PROCESS' => 'warning',
+                        'READY' => 'success',
+                        'OUT_FOR_DELIVERY' => 'info',
+                        'DELIVERED' => 'success',
+                        'COMPLETED' => 'success',
+                        'CANCELLED' => 'danger',
+                        default => 'gray',
+                    }),
                 TextColumn::make('payment_status')
-                    ->badge(),
+                    ->label('Status Pembayaran')
+                    ->badge()
+                    ->formatStateUsing(function (string $state): string {
+                        return match ($state) {
+                            'UNPAID' => 'Belum Dibayar',
+                            'PAID' => 'Sudah Dibayar',
+                            'EXPIRED' => 'Kedaluwarsa',
+                            default => $state,
+                        };
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'UNPAID' => 'danger',
+                        'PAID' => 'success',
+                        'EXPIRED' => 'warning',
+                        default => 'gray',
+                    }),
                 TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
+                    ->label('Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -64,17 +112,8 @@ class OrdersTable
             ])
             ->recordActions([
 
-                //PENDING - Order baru dibuat, menunggu konfirmasi x
-                //CONFIRMED - Order dikonfirmasi, siap dijadwalkan pickup x
-                //PICKED_UP - Laundry sudah diambil dari customer x
-                //IN_PROCESS - Sedang dalam proses pencucian/dry cleaning x
-                //READY - Laundry sudah selesai, siap diantar x
-                //OUT_FOR_DELIVERY - Sedang dalam perjalanan pengantaran x
-                //DELIVERED - Sudah diantar ke customer x
-                //COMPLETED - Order selesai (customer sudah terima dan bayar)
-                //CANCELLED - Order dibatalkan
-
-                ViewAction::make(),
+                ViewAction::make()
+                    ->label('Lihat'),
                 // alur dimulai
                 Action::make("Konfirmasi")
                     ->visible(fn(Order $record) => $record->status == "PENDING")
@@ -112,7 +151,7 @@ class OrdersTable
                     ])
                     ->action(fn(Order $record) => resolve(OrderService::class)->confirm($record))
                     ->color("success")
-                    ->icon(Heroicon::Check),
+                    ->icon('heroicon-o-check-circle'),
                 Action::make("Batalkan")
                     ->visible(fn(Order $record) => $record->status == "PENDING" || $record->status == "CONFIRMED")
                     ->requiresConfirmation()
@@ -147,12 +186,12 @@ class OrdersTable
                             ->rows(2)
                             ->default(fn(Order $record) => $record->notes ?? 'Tidak ada catatan'),
                         Textarea::make('reason')
-                            ->label('Alasan Penolakan')
+                            ->label('Alasan Pembatalan')
                             ->required()
                     ])
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->cancel($record, $data["reason"]))
                     ->color("danger")
-                    ->icon(Heroicon::XMark),
+                    ->icon('heroicon-o-x-circle'),
 
                 // mengambil laundry ke customer
                 Action::make("Ambil Laundry")
@@ -178,7 +217,7 @@ class OrdersTable
                     ])
                     ->color("info")
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->pickedUp($record))
-                    ->icon(Heroicon::Truck),
+                    ->icon('heroicon-o-truck'),
 
                 // penimbangan
                 // pengisian paket
@@ -186,6 +225,7 @@ class OrdersTable
                 Action::make("Transaction")
                     ->visible(fn(Order $record) => $record->status == "PICKED_UP" && $record->payment_status == "UNPAID")
                     ->label("Buat Transaksi")
+                    ->requiresConfirmation()
                     ->schema([
                         Section::make('Informasi Pelanggan')
                             ->schema([
@@ -223,7 +263,7 @@ class OrdersTable
                                             ->default(''),
 
                                         TextInput::make('qty')
-                                            ->label('Banyak unit')
+                                            ->label('Jumlah')
                                             ->numeric()
                                             ->step(0.1)
                                             ->default(0)
@@ -244,51 +284,58 @@ class OrdersTable
                                     ),
                             ]),
 
-                        Section::make("Jasa")
+                        Section::make("Biaya Tambahan")
                             ->schema([
                                 TextInput::make("delivery_fee")
                                     ->default(0)
                                     ->numeric()
-                                    ->label('Biaya Pengiriman')
+                                    ->label('Biaya Antar')
                             ])->columns(2)
 
                     ])
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->setOrderItem($record, $data))
-                    ->icon(Heroicon::CreditCard)
+                    ->icon('heroicon-o-credit-card')
                     ->color("info"),
 
                 // proses laundry
-                Action::make("Laundry")
+                Action::make("Proses Laundry")
                     ->visible(fn(Order $record) => $record->status == "PICKED_UP" && $record->payment_status == "PAID")
+                    ->requiresConfirmation()
                     ->action(fn(Order $record) => resolve(OrderService::class)->processing($record))
                     ->color("warning")
-                    ->icon(Heroicon::Cog6Tooth),
+                    ->icon('heroicon-o-cog-6-tooth'),
 
 
                 // Laundry selesai
                 Action::make("Laundry Selesai")
                     ->visible(fn(Order $record) => $record->status == "IN_PROCESS" && $record->payment_status == "PAID")
+                    ->requiresConfirmation()
                     ->action(fn(Order $record) => resolve(OrderService::class)->processingDone($record))
                     ->color("success")
-                    ->icon(Heroicon::CheckBadge),
+                    ->icon('heroicon-o-shield-check'),
 
                 // Mengirim laundry
                 Action::make("Kirim Laundry")
                     ->visible(fn(Order $record) => $record->status == "READY" && $record->payment_status == "PAID")
+                    ->requiresConfirmation()
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->outOfDelivery($record))
                     ->color("info")
-                    ->icon(Heroicon::PaperAirplane),
+                    ->icon('heroicon-o-paper-airplane'),
 
                 // laundry sampai
-                Action::make("Laundry Sudah sampai")
+                Action::make("Laundry Sudah Sampai")
                     ->visible(fn(Order $record) => $record->status == "OUT_FOR_DELIVERY" && $record->payment_status == "PAID")
+                    ->requiresConfirmation()
                     ->action(fn(array $data, Order $record) => resolve(OrderService::class)->delivered($record))
                     ->color("success")
-                    ->icon(Heroicon::HomeModern),
+                    ->icon('heroicon-o-gift'),
 
                 ActionGroup::make([
-                    EditAction::make(),
-                    DeleteAction::make(),
+                    EditAction::make()
+                        ->label('Edit'),
+                    DeleteAction::make()
+                        ->requiresConfirmation()
+                        ->label('Hapus'),
                 ])
             ]);
     }
