@@ -24,33 +24,74 @@ class OrdersTable
     {
         return $table
             ->modifyQueryUsing(fn($query) => $query->where('user_id', auth()->id()))
+            ->defaultSort('created_at', 'DESC')
             ->columns([
                 TextColumn::make('code')
+                    ->label('Kode Laundry')
                     ->searchable(),
-//                TextColumn::make('responsibleUser.name')
-//                    ->searchable(),
                 TextColumn::make('pickupAddress.label')
+                    ->label('Alamat Penjemputan')
                     ->searchable(),
                 TextColumn::make('deliveryAddress.label')
+                    ->label('Alamat Pengiriman')
                     ->searchable(),
                 TextColumn::make('status')
-                    ->badge(),
+                    ->label('Status')
+                    ->badge()
+                    ->formatStateUsing(function (string $state): string {
+                        return match ($state) {
+                            'PENDING' => 'Menunggu',
+                            'CONFIRMED' => 'Dikonfirmasi',
+                            'PICKED_UP' => 'Diambil',
+                            'IN_PROCESS' => 'Dalam Proses',
+                            'READY' => 'Siap',
+                            'OUT_FOR_DELIVERY' => 'Sedang Dikirim',
+                            'DELIVERED' => 'Terkirim',
+                            'COMPLETED' => 'Selesai',
+                            'CANCELLED' => 'Dibatalkan',
+                            default => $state,
+                        };
+                    })
+                    ->color(fn(string $state): string => match ($state) {
+                        'PENDING' => 'warning',
+                        'CONFIRMED' => 'info',
+                        'PICKED_UP' => 'primary',
+                        'IN_PROCESS' => 'warning',
+                        'READY' => 'success',
+                        'OUT_FOR_DELIVERY' => 'info',
+                        'DELIVERED' => 'success',
+                        'COMPLETED' => 'success',
+                        'CANCELLED' => 'danger',
+                        default => 'gray',
+                    }),
                 TextColumn::make('payment_status')
-//                    ->visible(fn($record) => $record->status == 'CONFIRMED'),
-                    ->badge(),
+                    ->label('Status Pembayaran')
+                    ->badge()
+                    ->formatStateUsing(function (string $state): string {
+                        return match ($state) {
+                            'UNPAID' => 'Belum Dibayar',
+                            'PAID' => 'Sudah Dibayar',
+                            'EXPIRED' => 'Kedaluwarsa',
+                            default => $state,
+                        };
+                    }),
                 TextColumn::make('subtotal_amount')
+                    ->label('Subtotal')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('delivery_fee')
+                    ->label('Biaya Pengiriman')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('total_amount')
+                    ->label('Total')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('completed_date')
+                    ->label('Tanggal Selesai')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

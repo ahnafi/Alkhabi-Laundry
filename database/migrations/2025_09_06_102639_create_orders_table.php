@@ -44,7 +44,7 @@ return new class extends Migration {
             $table->decimal('delivery_fee', 10, 2)->default(0);
             $table->decimal('total_amount', 12, 2)->default(0);
             $table->text('notes')->nullable();
-            $table->timestamp('completed_date')->nullable();
+            $table->dateTime('completed_date')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

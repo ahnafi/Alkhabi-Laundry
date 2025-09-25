@@ -2,6 +2,7 @@
 
 namespace App\Filament\U\Resources\Orders\Schemas;
 
+use App\Models\Order;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
@@ -24,7 +25,7 @@ class OrderForm
                 //create
 
                 Section::make('Alamat')
-                    ->description('lorem ipsum dolor sit amet')
+                    ->description('Silakan pilih alamat penjemputan dan pengiriman untuk pesanan Anda')
                     ->schema([
                         Select::make('pickup_address_id')
                             ->label('Alamat Penjemputan')
@@ -92,7 +93,6 @@ class OrderForm
                         ]),
                     Step::make('Dalam Pengerjaan')
                         ->schema([
-
                             Select::make('status')
                                 ->label('Status Pesanan')
                                 ->options([
@@ -110,53 +110,86 @@ class OrderForm
                                 ->default('PENDING')
                                 ->required(),
                             Select::make('payment_status')
+                                ->label('Status Pembayaran')
                                 ->disabled()
                                 ->options([
-                                    'UNPAID' => 'Unpaid',
-                                    'PAID' => 'Paid',
-                                    'EXPIRED' => 'Expired',
+                                    'UNPAID' => 'Belum dibayar',
+                                    'PAID' => 'Terbayar',
+                                    'EXPIRED' => 'Kadaluarsa',
                                 ])
                                 ->default('UNPAID')
                                 ->required(),
 
-                            TextInput::make('total_weight')
-                                ->disabled()
-                                ->numeric()
-                                ->default(null),
+                            Repeater::make('orderItems')
+                                ->label('Item Pesanan')
+                                ->collapsible(true)
+                                ->deletable(false)
+                                ->addable(false)
+                                ->relationship()
+                                ->grid(2)
+                                ->schema([
+                                    Select::make('service_id')
+                                        ->label('Layanan')
+                                        ->relationship('service', 'name')
+                                        ->preload()
+                                        ->searchable()
+                                        ->required()
+                                        ->disabled()
+                                        ->columnSpan(2),
+
+                                    TextInput::make('qty')
+                                        ->label('Jumlah')
+                                        ->numeric()
+                                        ->step(0.01)
+                                        ->minValue(0)
+                                        ->required()
+                                        ->disabled()
+                                        ->columnSpan(2),
+
+                                    TextInput::make('harga_satuan')
+                                        ->label('Harga per Satuan')
+                                        ->disabled()
+                                        ->prefix('Rp')
+                                        ->formatStateUsing(function ($record) {
+                                            return number_format($record?->service?->price_per_unit ?? 0, 0, ',', '.');
+                                        })
+                                        ->columnSpan(2),
+
+                                    TextInput::make('subtotal')
+                                        ->label('Subtotal')
+                                        ->numeric()
+                                        ->step(0.01)
+                                        ->prefix('Rp')
+                                        ->minValue(0)
+                                        ->required()
+                                        ->disabled()
+                                        ->columnSpan(2),
+                                ])
+                                ->columnSpanFull()
+                                ->columns(4),
+
                             TextInput::make('subtotal_amount')
+                                ->label('Subtotal Pesanan')
+                                ->prefix('Rp')
                                 ->disabled()
                                 ->required()
                                 ->numeric()
                                 ->default(0.0),
                             TextInput::make('delivery_fee')
+                                ->label('Biaya Pengiriman')
+                                ->prefix('Rp')
                                 ->disabled()
                                 ->required()
                                 ->numeric()
                                 ->default(0.0),
                             TextInput::make('total_amount')
+                                ->label('Total Pembayaran')
+                                ->prefix('Rp')
                                 ->disabled()
                                 ->required()
                                 ->numeric()
                                 ->default(0.0),
 
-                            Repeater::make('orderItems')
-                                ->label('Paket Laundry')
-                                ->schema([
-
-                                    Select::make('order_id')
-
-
-//                                    'order_id',
-//                                    'product_id',
-//                                    'service_id',
-//                                    'quantity',
-//                                    'weight',
-//                                    'price',
-//                                    'subtotal',
-                                ])
-//                                ->disabled()
-                                ->columnSpanFull()
-                                ->columns(2),
                         ])
                         ->columns(2),
                     Step::make('Feedback')
@@ -164,39 +197,13 @@ class OrderForm
                             // ...
                         ]),
                 ])
-                    ->startOnStep(2)
+                    ->startOnStep(function (Order $record) {
+                        if ($record->status == "PENDING") return 1;
+                        else if ($record->status == "COMPLETED") return 3;
+                        else return 2;
+                    })
                     ->visibleOn(['edit', 'update', 'view'])
                     ->columnSpanFull(),
-
-//                Select::make('payment_status')
-//                    ->options([
-//                        'UNPAID' => 'Unpaid',
-//                        'PAID' => 'Paid',
-//                        'EXPIRED' => 'Expired',
-//                    ])
-//                    ->default('UNPAID')
-//                    ->required(),
-//                TextInput::make('total_weight')
-//                    ->numeric()
-//                    ->default(null),
-//                TextInput::make('subtotal_amount')
-//                    ->required()
-//                    ->numeric()
-//                    ->default(0.0),
-//                TextInput::make('delivery_fee')
-//                    ->required()
-//                    ->numeric()
-//                    ->default(0.0),
-//                TextInput::make('total_amount')
-//                    ->required()
-//                    ->numeric()
-//                    ->default(0.0),
-//                Textarea::make('notes')
-//                    ->default(null)
-//                    ->columnSpanFull(),
-//                DateTimePicker::make('completed_date'),
-
-
             ]);
     }
 }

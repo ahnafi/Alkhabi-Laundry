@@ -276,7 +276,7 @@ class OrdersTable
                                             ->disabled(),
 
                                     ])
-                                    ->columns(3)
+                                    ->columns(2)
                                     ->defaultItems(1)
                                     ->addActionLabel('Tambah Item')
                                     ->deleteAction(

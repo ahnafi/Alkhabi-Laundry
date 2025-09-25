@@ -9,6 +9,7 @@ use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -22,6 +23,11 @@ class OrderService
         $order->status = "CONFIRMED";
         $order->responsible_user_id = auth()->id();
 
+        Notification::make("notify_order_confirmed")
+            ->icon(Heroicon::OutlinedCheckBadge)
+            ->success()
+            ->title("Berhasil menerima pesanan")
+            ->send();
 
         Notification::make("order_confirmed")
             ->success()
@@ -43,6 +49,12 @@ class OrderService
         $order->status = "CANCELLED";
         $order->responsible_user_id = auth()->id();
 
+        Notification::make("notify_order_canceled")
+            ->icon(Heroicon::OutlinedCheckBadge)
+            ->success()
+            ->title("Berhasil membatalkan pesanan")
+            ->send();
+
         Notification::make("order_cancelled")
             ->danger()
             ->title("Pesanan Laundry Dibatalkan")
@@ -60,6 +72,12 @@ class OrderService
         $customer = $order->customer;
 
         $order->status = "PICKED_UP";
+
+        Notification::make("notify_order_picked_up")
+            ->icon(Heroicon::OutlinedCheckBadge)
+            ->success()
+            ->title("Berhasil mengubah status laundry")
+            ->send();
 
         Notification::make("order_picked_up")
             ->info()
@@ -110,6 +128,12 @@ class OrderService
                 "total" => $subtotal + $data["delivery_fee"],
             ]);
 
+            Notification::make("notify_order_item_set")
+                ->icon(Heroicon::OutlinedCheckBadge)
+                ->success()
+                ->title("Berhasil Mengatur Item Pesanan")
+                ->send();
+
             // Notifikasi sukses ke pelanggan
             Notification::make("order_items_set_success")
                 ->success()
@@ -139,6 +163,12 @@ class OrderService
         if ($order->payment_status == "PAID") {
 
             $order->status = "IN_PROCESS";
+
+            Notification::make("notify_order_processing")
+                ->icon(Heroicon::OutlinedCheckBadge)
+                ->success()
+                ->title("Status berhasil diubah mejadi Dalam Proses Laundry")
+                ->send();
 
             Notification::make("order_processing")
                 ->info()
@@ -173,6 +203,12 @@ class OrderService
             $order->status = "READY";
             $order->save();
 
+            Notification::make("notify_order_processing")
+                ->icon(Heroicon::OutlinedCheckBadge)
+                ->success()
+                ->title("Status berhasil diubah mejadi Dalam Proses Laundry")
+                ->send();
+
             Notification::make("order_ready")
                 ->success()
                 ->title("Laundry Selesai dan Siap Diantar")
@@ -201,6 +237,13 @@ class OrderService
 
             $order->status = "OUT_FOR_DELIVERY";
             $order->save();
+
+
+            Notification::make("notify_order_out_of_delivery")
+                ->icon(Heroicon::OutlinedCheckBadge)
+                ->success()
+                ->title("Berhasil mengubah status untuk mengirim laundry")
+                ->send();
 
             Notification::make("order_out_of_delivery")
                 ->info()
@@ -233,6 +276,12 @@ class OrderService
         if ($order->payment_status == "PAID" && $order->status == "OUT_FOR_DELIVERY") {
             $order->status = "DELIVERED";
             $order->save();
+
+            Notification::make("notify_order_delivered")
+                ->icon(Heroicon::OutlinedCheckBadge)
+                ->success()
+                ->title("Order selesai dikirim")
+                ->send();
 
             Notification::make("order_delivered")
                 ->success()
@@ -267,6 +316,7 @@ class OrderService
     public function userConfirmed(Order $order): void
     {
         $order->status = "COMPLETED";
+        $order->completed_date = Carbon::now();
 
         Notification::make("order_completed")
             ->title("Berhasil Konfirmasi Pesanan ")
@@ -320,7 +370,7 @@ class OrderService
                     ->icon(Heroicon::OutlinedXCircle);
             }
 
-            Log::info("");
+            Log::info("order canceled by user");
 
             $order->save();
 
